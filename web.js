@@ -20,6 +20,7 @@ app.get('/grabit', function(req, res) {
         };
         var request = http.request(options);
         request.on('response', function(response) {
+            console.log(response.headers);
             res.writeHead(200, response.headers);
             response.on('data', function(chunk) {
                 res.write(chunk);
@@ -39,7 +40,7 @@ app.get('/grabit', function(req, res) {
     }
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
