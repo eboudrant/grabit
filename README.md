@@ -1,7 +1,7 @@
 # Access
 
 Just grab it from corporates...if your proxy block it
-http://grabit.herokuapp.com/grabit?host=<HOST>&port=<PORT>&path=<PATH>
+http://grabit.herokuapp.com/grabit?host=HOST&port=PORT&path=PATH
 
 # About
 
