@@ -9,19 +9,35 @@ app.get('/', function(request, response) {
 
 app.get('/grabit', function(req, res) {
     if (req.query.path) {
+        var grabIt = {
+                host: req.query.host,
+                port: req.query.port,
+                path: req.query.path,
+                getUrl: function() { 
+                    return 'http://' + this.host + ':' + this.port + this.path; 
+                },
+                getName: function() { 
+                    var name = req.query.path;
+                    name = name.substring(0, (name.indexOf("#") == -1) ? name.length : name.indexOf("#"));
+                    name = name.substring(0, (name.indexOf("?") == -1) ? name.length : name.indexOf("?"));
+                    name = name.substring(name.lastIndexOf("/") + 1, name.length);
+                    return name;
+                }
+            };
         var options = {
-            port: req.query.port,
-            host: req.query.host,
+            port: grabIt.port,
+            host: grabIt.host,
             method: 'GET',
-            path: req.query.path,
+            path: grabIt.path,
             headers: {
                 'Connection': 'keep-alive'
             }
         };
         var request = http.request(options);
         request.on('response', function(response) {
-            console.log(response.headers);
-            res.writeHead(200, response.headers);
+            var headers = response.headers;
+            headers['Content-Disposition'] = 'attachment; filename=' + grabIt.getName();
+            res.writeHead(200, headers);
             response.on('data', function(chunk) {
                 res.write(chunk);
             });
@@ -39,7 +55,6 @@ app.get('/grabit', function(req, res) {
         res.end('not found');
     }
 });
-
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
