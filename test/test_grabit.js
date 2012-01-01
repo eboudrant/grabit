@@ -1,3 +1,9 @@
+
+/*!
+ * GrabIt
+ * Copyright(c) 2012 ebtokyo <emmanuel.boudrant@gmail.com>
+ */
+ 
 var grabit = require('../lib/grabit.js');
 
 exports.grabitFromSimpleUrl = function (test) {
