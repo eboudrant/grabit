@@ -47,3 +47,13 @@ exports.grabitFromUrlWithQueryAndHash = function (test) {
     test.equal(o.getUrl(), stringUrl);
     test.done();
 };
+
+exports.grabitGetOptions = function (test) {
+    var stringUrl = 'http://www.cambiaresearch.com:80/snippets/csharp/regex/uri_regex.aspx?q=t&a=b#hash';
+    var o = new grabit.GUrl(stringUrl);
+    var options = o.getOptions();
+    test.equal(options.host, 'www.cambiaresearch.com:80');
+    test.equal(options.path, '/snippets/csharp/regex/uri_regex.aspx?q=t&a=b');
+    test.equal(options.method, 'GET');
+    test.done();
+};
