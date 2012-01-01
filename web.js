@@ -3,8 +3,8 @@ var grabit = require("./lib/grabit.js");
 var app = express.createServer(express.logger());
 
 app.get('/grabit', function(req, res) {
-    console.log('new request...');
     if (req.query.src) {
+        console.log('new request on ' + req.query.src + ' ...');
         var grabIt = new grabit.GUrl(req.query.src);
         grabIt.transfertTo(res);
     } else {
