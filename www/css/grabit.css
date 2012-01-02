@@ -3,7 +3,7 @@ body {
   font-size: 29px;
   line-height: 34px;
   color: #222;
-  margin: 30; padding: 30;
+  margin: 0; padding: 0;
 }
 
 .myButton {
@@ -20,7 +20,7 @@ body {
 	border:1px solid #84bbf3;
 	display:inline-block;
 	color:#ffffff;
-	font-family:Arial;
+	font-family:'Prociono', serif;
 	font-size:22px;
 	font-weight:normal;
 	padding:6px 24px;
@@ -37,7 +37,15 @@ body {
 }
 
 .footer {
-    font-size: 14px;
+    font-size: 18px;
+    position:fixed;
+    bottom:0%;
+    width:100%;
+    text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+    color:#ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
 }
 
 p {
