@@ -23,26 +23,47 @@ app.get('/', function(req, res) {
 });
 
 app.get('/db_callback', function(req, res) {
-    
-});
-
-app.get('/dropit', function(req, res) {
-    var url;
-    client.request_token(function(status, request_token_reply) {
-        if(status === 200) {
-            url = client.build_authorize_url(request_token_reply.oauth_token);
-            res.redirect(url);
-            res.end();
-        } else {
-            res.writeHead(status, {
+    if (req.query.oauth_token) {
+        var grabIt = new grabit.GUrl(req.query.src);
+        grabIt.dropboxTo(client, req.query.oauth_token, req.query.oauth_token_secret, req.query.uid, res);
+    }
+    else {
+        res.writeHead(404, {
             'Content-Type': 'text/html',
             'Cache-control': 'no-store'
         });
-        res.end(status + ' - ' + request_token_reply);
-        }
-    });
+        res.end('404 - not found');
+    }
 });
 
+app.get('/dropit', function(req, res) {
+    if (req.query.src) {
+        var url, callback = 'http://localhost:5000/db_callback?src=test';
+        client.request_token(function(status, request_token_reply) {
+            if (status === 200) {
+                // todo, set in session ?
+                url = client.build_authorize_url(request_token_reply.oauth_token, callback);
+                res.contentType('text/plain');
+                res.header('Content-Length', url.length);
+                res.end(url);
+            }
+            else {
+                res.writeHead(status, {
+                    'Content-Type': 'text/html',
+                    'Cache-control': 'no-store'
+                });
+                res.end(status + ' - ' + request_token_reply);
+            }
+        });
+    }
+    else {
+        res.writeHead(404, {
+            'Content-Type': 'text/html',
+            'Cache-control': 'no-store'
+        });
+        res.end('404 - not found');
+    }
+});
 app.get('/grabit', function(req, res) {
     if (req.query.src) {
         console.log('new request on ' + req.query.src + ' ...');

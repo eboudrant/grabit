@@ -24,7 +24,7 @@ function dropit() {
             console.log('damn: ' + data);
         },
         success: function(data) {
-            console.log('bingo: ' + data);
+            window.location = data;
         }
     });
 }
