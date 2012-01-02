@@ -1,7 +1,6 @@
 # Access
 
 Just grab it from corporates...if your proxy block it
-http://transfert.herokuapp.com
 
 # About
 
