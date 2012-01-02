@@ -5,6 +5,6 @@ http://grabit.herokuapp.com/grabit?src=
 
 # About
 
-Developed using NodeJS / ExpressJS
+Developed using NodeJS / ExpressJS / Jade
 With Cloud9IDE
-Deployed on Heroku
+Deployed with support of Heroku's Ninjas !

@@ -1,0 +1,21 @@
+html
+    include includes/head  
+    body
+        .container(style='display:block;width:850px;height:400px;background-color:#fff;margin-left:auto;margin-right:auto;')
+            p Your file is blocked, just take a <b>tranfert.io</b> ! 
+            p 
+            input(id='_src', name='src', value='http://', size=100, onChange='validateit();', onClick='selectit();') 
+            p
+            center
+                a.myButton(href='#', onClick='grabit();')
+                    #label To my computer
+            //
+                p
+                p Or You prefer to take a <b>tranfert.io</b> into your Dropbox, no problem !
+                center
+                    a(href='#', onClick='dropit();', disabled='true')
+                        img(src='img/dropbox-sharebox-100px.png')
+        script
+            document.getElementById('_src').focus();
+            selectit();
+    include includes/foot
