@@ -4,6 +4,6 @@
   "dependencies": {
     "express": "2.2.0",
     "jade": "0.20.0",
-    "dropbox": "0.3.3"
+    "dbox": "0.2.0"
   }
 }

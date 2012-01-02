@@ -4,16 +4,45 @@
  */
 var express = require('express'),
     grabit = require("./lib/grabit.js"),
-    app = express.createServer(express.logger());
+    app = express.createServer(express.logger()),
+    dbox = require("dbox"),
+    client = dbox.createClient({
+        app_key: '7hrx1i233qhlf73',
+        app_secret: 'p1jtpa134jz1f67'
+    });
+    
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/www');
 app.use(express.static(__dirname + '/www'));
+
 /**
  * ExpressJS /grabit mapping
  */
 app.get('/', function(req, res) {
     res.render('index');
 });
+
+app.get('/db_callback', function(req, res) {
+    
+});
+
+app.get('/dropit', function(req, res) {
+    var url;
+    client.request_token(function(status, request_token_reply) {
+        if(status === 200) {
+            url = client.build_authorize_url(request_token_reply.oauth_token);
+            res.redirect(url);
+            res.end();
+        } else {
+            res.writeHead(status, {
+            'Content-Type': 'text/html',
+            'Cache-control': 'no-store'
+        });
+        res.end(status + ' - ' + request_token_reply);
+        }
+    });
+});
+
 app.get('/grabit', function(req, res) {
     if (req.query.src) {
         console.log('new request on ' + req.query.src + ' ...');

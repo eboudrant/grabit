@@ -13,7 +13,20 @@ function selectit() {
 }
 
 function dropit() {
-    alert('Comming soon, stay tuned !');
+    var vurl, src;  
+    src = document.getElementById('_src');
+    vurl = '/dropit?src=' + encodeURI(src.value);
+    $.ajax({
+        url: vurl,
+        dataType: 'text',
+        context: document.body,
+        error: function(data) {
+            console.log('damn: ' + data);
+        },
+        success: function(data) {
+            console.log('bingo: ' + data);
+        }
+    });
 }
 
 function grabit() {
