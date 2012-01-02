@@ -13,7 +13,7 @@ function selectit() {
 }
 
 function dropit() {
-    
+    alert('Comming soon, stay tuned !');
 }
 
 function grabit() {
